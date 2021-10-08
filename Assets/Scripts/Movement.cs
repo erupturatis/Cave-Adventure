@@ -7,8 +7,12 @@ public class Movement : MonoBehaviour
     Rigidbody2D rb;
     public Transform Down;
     public Transform Forward;
+    public Transform Up;
     public float force = 6f;
+    public float ForceJump = 5f;
     bool IsOnGround = false;
+
+    private Vector2 NewVelocity;
     void Start()
     {
         rb=GetComponent<Rigidbody2D>();
@@ -19,35 +23,39 @@ public class Movement : MonoBehaviour
     {
 
         //print(force);
-        if (Input.GetKey("d"))
+        if (Input.GetKeyDown("w") && IsOnGround)
         {
-            //print("apasa");
-            Vector3 direction = Forward.position-gameObject.transform.position;
-            rb.AddForce(direction * force);
+            print("jumpuit");
+            NewVelocity.Set(0f,0f);
+            //rb.velocity = NewVelocity;
+            Vector2 NewForce = new Vector2( transform.position.x - Up.position.x , transform.position.y - Up.position.y);
+            rb.AddForce(NewForce * -ForceJump , ForceMode2D.Impulse);
+            IsOnGround = false;
         }
-        if (Input.GetKeyDown("w"))
+        if (IsOnGround)
         {
-            //print("ceva");
-            Vector3 Up = new Vector3(0f, 1f, 0f);
-            rb.AddForce(Up * force , ForceMode2D.Impulse);
+            NewVelocity.Set(Forward.position.x - gameObject.transform.position.x, Forward.position.y - gameObject.transform.position.y);
+            rb.velocity = NewVelocity * force;
         }
+        
         if (IsOnGround)
         {
             //print("a inceput");
             rb.gravityScale = 0;
             Vector3 direction = Down.position - transform.position;
             rb.AddForce(direction * force );
+            
         }
         else
         {
-            rb.gravityScale = 10;
+            rb.gravityScale = 1;
 
         }
         //print(IsOnGround);
         
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "ground")
         {
