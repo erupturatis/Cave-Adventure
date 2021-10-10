@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     private float ForceJump;
     [SerializeField]
     private float rotationSpeed;
+    private float rotationSpeedClick = 1000f;
     [SerializeField]
     private float slopeCheckDistance;
     private float slopeDownAngle;
@@ -60,6 +61,7 @@ public class Movement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance,whatIsGround);
         if (hit)
         {
+            
             slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
             Q = Quaternion.Euler(Quaternion.FromToRotation(Vector3.up, hit.normal).eulerAngles); // calculating the angle of the slope
 
@@ -88,6 +90,7 @@ public class Movement : MonoBehaviour
             gameObject.transform.rotation = Q; // gameobject has the same angle as the slope
             newVelocity.Set(Forward.position.x - gameObject.transform.position.x, Forward.position.y - gameObject.transform.position.y);
             rb.velocity = newVelocity * force;
+            //rb.AddForce(newVelocity * force, ForceMode2D.Force );
             Vector3 V = new Vector3(Down.transform.position.x - transform.position.x, Down.transform.position.y - transform.position.y, 0f);
             rb.AddForce(V * force * 3); // add force down to keep player on track
         }
@@ -107,7 +110,15 @@ public class Movement : MonoBehaviour
             direction = -direction;
         }
         direction = -direction;
-        rb.MoveRotation(transform.rotation.eulerAngles.z + Mathf.Sign(direction) * rotationSpeed*Time.fixedDeltaTime);
+        if (Input.GetMouseButton(0))
+        {
+            rb.MoveRotation(transform.rotation.eulerAngles.z + -1f * rotationSpeedClick * Time.fixedDeltaTime);
+        }
+        else
+        {
+            rb.MoveRotation(transform.rotation.eulerAngles.z + Mathf.Sign(direction) * rotationSpeed * Time.fixedDeltaTime);
+        }
+        
 
     }
 

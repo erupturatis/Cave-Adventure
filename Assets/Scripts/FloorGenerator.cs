@@ -8,19 +8,25 @@ public class FloorGenerator : MonoBehaviour
     private GameObject[] floorPrefabs;
     [SerializeField]
     private GameObject End;
-    private GameObject Player;
+    [SerializeField]
+    private GameObject player;
+
     private int length;
     private bool playerEntered;
     void Start()
     {
         length = floorPrefabs.Length;
-        Player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
     private void Update()
     {
-        if(Player.transform.position.x - transform.position.x > 75f)
+        if(player.transform.position.x - transform.position.x > 75f)
         {
             Destroy(gameObject);
+        }
+        if(player.transform.position.x > transform.position.x)
+        {
+            SpawnNextChunk();
         }
     }
     public void SpawnNextChunk()
