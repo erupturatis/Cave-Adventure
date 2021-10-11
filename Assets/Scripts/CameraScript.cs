@@ -31,7 +31,7 @@ public class CameraScript : MonoBehaviour
         {
             cameraComp.orthographicSize = cameraComp.orthographicSize + Mathf.Sign(diff) * sizeChangeSpeed * Time.deltaTime;
         }
-        print(cameraComp.orthographicSize);
+
     }
 
     // Update is called once per frame
