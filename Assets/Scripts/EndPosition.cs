@@ -5,4 +5,5 @@ using UnityEngine;
 public class EndPosition : MonoBehaviour
 {
     public GameObject End;
+
 }

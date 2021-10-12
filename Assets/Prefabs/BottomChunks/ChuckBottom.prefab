@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4928387829837432156}
   - component: {fileID: 4928387829837432157}
+  - component: {fileID: -3946283809476689981}
   m_Layer: 0
   m_Name: ChuckBottom
   m_TagString: Untagged
@@ -46,18 +47,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 393ca4f257e3b00438767b4d21669303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorPrefabsTop:
-  - {fileID: 1014492883624344759, guid: 1dc6c198e9f596a409ceeb5b5fae76a2, type: 3}
-  floorPrefabsBottom:
-  - {fileID: 4928387829837432159}
-  - {fileID: 8259940581263914223, guid: b6f367581baa1084d96acada7c3153e7, type: 3}
   pairTop: {fileID: 0}
+--- !u!114 &-3946283809476689981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4928387829837432159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88ab4ffa6b2d3384381660ff7340001e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   End: {fileID: 4928387830300261419}
-  howMuchItGoesDownTop:
-  - 11
-  howMuchItGoesDownBottom:
-  - 11
-  - 18.5
 --- !u!1 &4928387829866474086
 GameObject:
   m_ObjectHideFlags: 0
