@@ -11,6 +11,18 @@ public class ChunkCentralizer : MonoBehaviour
     public float[] howMuchItGoesDownBottom;
 
     public GameObject player;
+    public GameObject initPlatform;
+
+    public GameObject platformStart;
+    public GameObject playerStart;
+
+    public void StartTheGame()
+    {
+        //Create platform and player
+        player.SetActive(true);
+        initPlatform.SetActive(true);
+
+    }
 
     private void Start()
     {
@@ -33,6 +45,7 @@ public class ChunkCentralizer : MonoBehaviour
             howMuchItGoesDownBottom[i] = gameob.transform.position.y - ep.transform.position.y;
             Destroy(gameob);
         }
+        StartTheGame();
     }
 
 }

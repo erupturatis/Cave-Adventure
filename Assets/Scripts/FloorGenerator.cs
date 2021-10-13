@@ -24,7 +24,7 @@ public class FloorGenerator : MonoBehaviour
     public void CreateTop()
     {
 
-        pairTop = Instantiate(floorPrefabsTop[Random.Range(0, lengthTop-1)], transform.position + new Vector3(0f,5f,0f), Quaternion.identity);
+        pairTop = Instantiate(floorPrefabsTop[Random.Range(0, lengthTop-1)], transform.position + new Vector3(0f,12f,0f), Quaternion.identity);
 
     }
     void InitGameObjects()
@@ -34,6 +34,7 @@ public class FloorGenerator : MonoBehaviour
 
         howMuchItGoesDownTop = cc.howMuchItGoesDownTop;
         howMuchItGoesDownBottom = cc.howMuchItGoesDownBottom;
+
     }
 
     void Start()
@@ -55,7 +56,7 @@ public class FloorGenerator : MonoBehaviour
     {
         //cc = GameObject.FindObjectOfType<ChunkCentralizer>();
 
-        if (player.transform.position.x - transform.position.x > 75f)
+        if (player.transform.position.x - transform.position.x > 140f)
         {
 
             Destroy(pairTop);
@@ -83,7 +84,7 @@ public class FloorGenerator : MonoBehaviour
 
             if(pairScript.End.transform.position.y - selfEp.End.transform.position.y < 8f)
             {
-                print("finds special pt lower");
+                //print("finds special pt lower");
                 //the top need to go up somewhat.
                 //gets a top and a bottom that go away from each other
                 int iterations = 0;
@@ -95,7 +96,7 @@ public class FloorGenerator : MonoBehaviour
                     ind2 = Random.Range(0, lengthTop );
                     if(howMuchItGoesDownBottom[ind1] > howMuchItGoesDownTop[ind2])
                     {
-                        break;
+                        goto F;
                     }
                 }
                 //It gets some non random pair
@@ -112,7 +113,7 @@ public class FloorGenerator : MonoBehaviour
                     }
                 }
                 A:
-                print("broken from loop");
+                ;
             }
             else
             {
@@ -122,7 +123,7 @@ public class FloorGenerator : MonoBehaviour
 
             if (pairScript.End.transform.position.y - selfEp.End.transform.position.y > 20f)
             {
-                print("finds special pt higher");
+                //print("finds special pt higher");
                 //the top need to go down somewhat.
                 //gets a top and a bottom that go away from each other
                 int iterations = 0;
@@ -134,7 +135,7 @@ public class FloorGenerator : MonoBehaviour
                     ind2 = Random.Range(0, lengthTop);
                     if (howMuchItGoesDownBottom[ind1] < howMuchItGoesDownTop[ind2])
                     {
-                        break;
+                        goto F;
                     }
                 }
                 //It gets some non random pair
@@ -151,7 +152,7 @@ public class FloorGenerator : MonoBehaviour
                     }
                 }
                 A:
-                print("broken from loop");
+                ;
             }
             else
             {
@@ -159,14 +160,16 @@ public class FloorGenerator : MonoBehaviour
                 ind2 = Random.Range(0, lengthTop);
             }
 
-
+            F:
+            ;
 
             //print(ind1 + "   " + ind2);
+            //print(howMuchItGoesDownBottom.Length);
             float p2 = pairScript.End.transform.position.y - howMuchItGoesDownTop[ind2];
             float p1 = selfEp.End.transform.position.y - howMuchItGoesDownBottom[ind1];
             while(p2 - p1<3f)
             {
-                print("intrat in while bruh");
+
                 ind1 = Random.Range(0, lengthBot);
                 ind2 = Random.Range(0, lengthTop);
 
