@@ -40,7 +40,7 @@ public class CameraScript : MonoBehaviour
 
         Vector3 pos = new Vector3(player.transform.position.x + Xdis, player.transform.position.y + Ydis, -10f);
         idealCameraSize = ck.SizeCamera;
-        HandleCameraSize();
+        //HandleCameraSize();
 
         
         transform.position = pos;
